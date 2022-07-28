@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  nginx:
+    restart: always
+    container_name: con_cilsy_laravel
+    # lokasi source code
+    build:
+      context: ./
+      dockerfile: web.dockerfile
+    # path untuk source di dalam docker
+    volumes:
+      - ./:/var/www
+    image: webserver_cilsy_laravel:1.0
+    ports:
+      - "8070:80"
+
+  app:
+    restart: always
+    container_name: app_cilsy
+    build:
+      # args:
+      #   user: nasyitha
+      #   uid: 1000
+      context: ./
+      dockerfile: app.dockerfile
+    image: app_cilsy_laravel:1.0
+    volumes:
+      - ./:/var/www
+
+
